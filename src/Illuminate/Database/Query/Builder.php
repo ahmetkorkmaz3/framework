@@ -3763,6 +3763,8 @@ class Builder implements BuilderContract
     }
 
     /**
+     * Add a "where true" clause to the query.
+     *
      * @param string|array $columns
      * @param string $boolean
      * @param bool $not
@@ -3781,6 +3783,8 @@ class Builder implements BuilderContract
     }
 
     /**
+     * Add a "where false" clause to the query.
+     *
      * @param string|array $columns
      * @param string $boolean
      *
