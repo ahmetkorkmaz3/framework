@@ -5091,6 +5091,13 @@ SQL;
         $this->assertSame('select * from "users" where "id" = false and "email" = false', $builder->toSql());
     }
 
+    public function testWhereFalseWithTrueFunction()
+    {
+        $builder = $this->getBuilder();
+        $builder->select('*')->from('users')->whereTrue('id', 'and', true);
+        $this->assertSame('select * from "users" where "id" = false', $builder->toSql());
+    }
+
     protected function getConnection()
     {
         $connection = m::mock(ConnectionInterface::class);
