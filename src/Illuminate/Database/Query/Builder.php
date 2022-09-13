@@ -3761,4 +3761,33 @@ class Builder implements BuilderContract
 
         static::throwBadMethodCallException($method);
     }
+
+    /**
+     * @param string|array $columns
+     * @param string $boolean
+     * @param bool $not
+     *
+     * @return $this
+     */
+    public function whereTrue($columns, $boolean = 'and', $not = false)
+    {
+        $type = $not ? 'False' : 'True';
+
+        foreach (Arr::wrap($columns) as $column) {
+            $this->wheres[] = compact('type', 'column', 'boolean');
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param string|array $columns
+     * @param string $boolean
+     *
+     * @return $this
+     */
+    public function whereFalse($columns, $boolean = 'and')
+    {
+        return $this->whereTrue($columns, $boolean, true);
+    }
 }

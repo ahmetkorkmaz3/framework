@@ -369,6 +369,30 @@ class Grammar extends BaseGrammar
     }
 
     /**
+     * Compile a "where true" clause.
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query
+     * @param  array  $where
+     * @return string
+     */
+    protected function whereTrue(Builder $query, $where)
+    {
+        return $this->wrap($where['column']).' = true';
+    }
+
+    /**
+     * Compile a "where false" clause.
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query
+     * @param  array  $where
+     * @return string
+     */
+    protected function whereFalse(Builder $query, $where)
+    {
+        return $this->wrap($where['column']).' = false';
+    }
+
+    /**
      * Compile a "between" where clause.
      *
      * @param  \Illuminate\Database\Query\Builder  $query

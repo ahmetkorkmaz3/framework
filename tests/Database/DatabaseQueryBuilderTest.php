@@ -5063,6 +5063,34 @@ SQL;
         $this->assertEquals([], $clone->getBindings());
     }
 
+    public function testWhereTrue()
+    {
+        $builder = $this->getBuilder();
+        $builder->select('*')->from('users')->whereTrue('id');
+        $this->assertSame('select * from "users" where "id" = true', $builder->toSql());
+    }
+
+    public function testWhereFalse()
+    {
+        $builder = $this->getBuilder();
+        $builder->select('*')->from('users')->whereFalse('id');
+        $this->assertSame('select * from "users" where "id" = false', $builder->toSql());
+    }
+
+    public function testArrayWhereTrue()
+    {
+        $builder = $this->getBuilder();
+        $builder->select('*')->from('users')->whereTrue(['id', 'email']);
+        $this->assertSame('select * from "users" where "id" = true and "email" = true', $builder->toSql());
+    }
+
+    public function testArrayWhereFalse()
+    {
+        $builder = $this->getBuilder();
+        $builder->select('*')->from('users')->whereFalse(['id', 'email']);
+        $this->assertSame('select * from "users" where "id" = false and "email" = false', $builder->toSql());
+    }
+
     protected function getConnection()
     {
         $connection = m::mock(ConnectionInterface::class);
